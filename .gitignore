@@ -19,7 +19,7 @@ output/
 __pycache__/
 *.pyc
 scripts/
-notebooks/.venv/
+notebooks/
 data/raw/
 data/processed/
 data/interim/
