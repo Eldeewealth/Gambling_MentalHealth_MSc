@@ -18,8 +18,6 @@ figures/
 output/
 __pycache__/
 *.pyc
-scripts/
-notebooks/
 data/raw/
 data/processed/
 data/interim/
