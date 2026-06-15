@@ -1,62 +1,121 @@
 # Gambling_MentalHealth_MSc
 
-Overview of an MSc project exploring links between gambling behaviors and mental health using UK data sources (UKHLS, HSE, GSGB).
+[![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/pandas-%3E%3D1.5-brightgreen.svg)](https://pandas.pydata.org/)
+[![Jupyter](https://img.shields.io/badge/jupyter-notebook-orange.svg)](https://jupyter.org/)
+[![Data](https://img.shields.io/badge/data-UKHLS%2CHSE%2CGSGB-lightgrey.svg)](#data-sources)
+[![Status](https://img.shields.io/badge/status-in%20progress-yellow.svg)](#project-status)
 
-## Project Structure
+---
 
-See folders in this repo. Key paths:
-- `notebooks/` — analysis in numbered order
-- `scripts/` — reusable helpers and optional CLI
-- `data/` — raw, interim, processed, and exports
-- `output/` — auxiliary outputs (logs, converted notebooks, etc.)
+## Project Summary
+
+A reproducible MSc analysis pipeline for UK survey evidence on gambling and mental health.  
+This repository covers raw ingestion, variable mapping, derived outcomes, harmonisation, and analysis-ready dataset preparation for UKHLS, HSE 2018, and GSGB.
+
+---
+
+## Visual Overview
+
+![Pipeline diagram](docs/images/pipeline-overview.png)
+
+> Replace with your own image showing raw source ingestion, preprocessing, harmonisation, and analysis-ready export.
+
+![Data model](docs/images/data-schema.png)
+
+> Replace with your own image showing derived variables like `ghq12_score`, `pgsi_category`, and `problem_gambling`.
+
+---
+
+## Data Sources
+
+- `data/raw/UKHLS/`: UKHLS waves `k`, `l`, `n`
+- `data/raw/HSE/`: HSE 2018 SPSS source
+- `data/raw/GSGB/`: GSGB Excel source tables
+
+---
+
+## What’s Included
+
+### Notebooks
+- `notebooks/01_explore_UKHLS.ipynb`
+  - raw UKHLS SPSS ingestion
+  - wave-specific variable dictionaries
+  - Parquet export
+
+- `notebooks/02_hse_preprocess.ipynb`
+  - HSE 2018 SPSS ingestion
+  - GHQ-12 and PGSI derivation
+  - raw/clean/label standardisation
+  - model-ready and analysis-ready dataset creation
+
+- `notebooks/03_gsgb_preprocess.ipynb`
+  - GSGB Excel ingestion
+  - table cleaning, percentage conversion
+  - structured GSGB model-ready outputs
+
+- `notebooks/04_harmonisation.ipynb`
+  - cross-source harmonisation
+  - sex, age, income, year, and PGSI standardisation
+  - harmonised dataset export
+
+### Scripts
+- `scripts/utils_clean.py`
+  - column standardisation
+  - missing-value normalisation
+  - column promotion helper
+
+- `scripts/utils_io.py`
+  - atomic Parquet/CSV writing
+  - robust file read/write
+
+- `scripts/merge_ukhls.py`
+  - combined UKHLS wave merge
+  - core variable selection and CSV export
+
+### Prototype App
+- `streamlit_app_old.py`
+  - dashboard prototype
+  - dataset loaders, filters, charts
+
+---
+
+## Output Artifacts
+
+- `data/processed/analysis-ready/`
+- `data/processed/harmonised/`
+- `data/processed/model-ready/`
+- `data/interim/`
+- `data/exports/tables/`
+- `outputs/hse_models/`
+
+---
 
 ## Environment
 
-Using a local virtual environment in `.venv`.
+Install dependencies:
 
-PowerShell (Windows):
-- Activate: `..\.venv\Scripts\Activate.ps1`
-- Install deps: `pip install -r requirements.txt`
-- Optional kernel: `python -m ipykernel install --user --name ukhls --display-name "UKHLS (.venv)"`
+```powershell
+pip install -r requirements.txt
+```
+## Core dependencies:
 
-## Run Order
+- pandas
+- pyreadstat
+- numpy
+- ipykernel
+- Run Order
+- 01_explore_UKHLS.ipynb
+- 02_hse_preprocess.ipynb
+- 03_gsgb_preprocess.ipynb
+- 04_harmonisation.ipynb
 
-1. `notebooks/01_explore_UKHLS.ipynb`
-   - Read UKHLS `.sav` files
-   - Select 21 columns of interest
-   - Save Parquet + CSV previews to `data/interim/`
-
-2. `notebooks/02_harmonize_merge.ipynb`
-   - Standardize and clean UKHLS subsets
-   - Promote standardized fields
-   - Save to `data/processed/` (standardized, model-ready, analysis-ready)
-
-3. `notebooks/03_hse_preprocess.ipynb`
-   - Read HSE SPSS
-   - Map variables and derive PGSI & GHQ-12
-   - Save to `data/interim/` and `data/processed/`
-
-4. `notebooks/04_gsgb_preprocess.ipynb`
-   - Read GSGB Excel tables
-   - Rename variables and derive PGSI bins
-   - Save to `data/interim/` and `data/processed/`
-
-5. `notebooks/05_compare_cross_sources.ipynb`
-   - Combine HSE + UKHLS + GSGB
-   - EDA, regression, SHAP, fairness checks
-   - Export figures/tables to `data/exports/`
-
-## Scripts
-
-- `scripts/merge_ukhls.py` — optional CLI mirroring step 02
-- `scripts/utils_io.py` — safe save/load helpers
-- `scripts/utils_clean.py` — cleaning helpers and constants
-
-## Data Locations
-
-- `data/raw/UKHLS/` — SPSS inputs (k/l/n waves)
-- `data/raw/HSE/` — SPSS inputs and README
-- `data/raw/GSGB/` — Excel inputs and README
-
-This repo ignores large, derived, and environment files in `.gitignore`.
-
+### Key Deliverables
+- Raw ingestion of UKHLS, HSE, and GSGB
+#### Derived variables:
+- ghq12_score
+- ghq12_label
+- pgsi_score
+- pgsi_category
+- problem_gambling
+- Harmonised demographic variables
