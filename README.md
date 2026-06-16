@@ -17,11 +17,11 @@ This repository covers raw ingestion, variable mapping, derived outcomes, harmon
 
 ## Visual Overview
 
-![Pipeline diagram](docs/images/pipeline-overview.png)
+![Pipeline diagram](images/pipeline-overview.jpeg)
 
 > Replace with your own image showing raw source ingestion, preprocessing, harmonisation, and analysis-ready export.
 
-![Data model](docs/images/data-schema.png)
+![Data model](images/data-schema.png)
 
 > Replace with your own image showing derived variables like `ghq12_score`, `pgsi_category`, and `problem_gambling`.
 
