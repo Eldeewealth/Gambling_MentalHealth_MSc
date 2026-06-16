@@ -18,15 +18,26 @@ This repository covers raw ingestion, variable mapping, derived outcomes, harmon
 ## Visual Overview
 
 ![Pipeline diagram](images/pipeline-overview.jpeg)
+---
+---
 
-> Replace with your own image showing raw source ingestion, preprocessing, harmonisation, and analysis-ready export.
+## Explainable AI (SHAP)
 
-![Data model](images/data-schema.png)
+### SHAP Summary Plot (Global Importance)
+![SHAP Summary](images/shap_summary.png)
 
-> Replace with your own image showing derived variables like `ghq12_score`, `pgsi_category`, and `problem_gambling`.
+### SHAP Feature Impact
+![SHAP Feature Impact](images/shap_feature_importance.png)
+
+### SHAP Interaction Effects
+![SHAP Interaction](images/shap_interaction.png)
 
 ---
 
+## Streamlit Dashboard
+
+### App Overview
+![Streamlit Home](images/dashboardstream.jpeg)
 ## Data Sources
 
 - `data/raw/UKHLS/`: UKHLS waves `k`, `l`, `n`
