@@ -15,12 +15,15 @@ import pandas as pd
 import plotly.express as px
 import shap
 import statsmodels.formula.api as smf
+from scripts.build_hse_dataset import build_hse_dataset
+from scripts.build_ukhls_dataset import build_ukhls_dataset
+from scripts.build_gsgb_dataset import build_gsgb_dataset
+from scripts.build_harmonised_dataset import build_harmonised_dataset
 import streamlit as st
 from fairlearn.metrics import MetricFrame, false_positive_rate, selection_rate
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import re
-from pathlib import Path
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
@@ -66,6 +69,26 @@ def read_parquet_safe(path: Union[str, Path]) -> Tuple[Optional[pd.DataFrame], O
         return pd.read_parquet(p), None
     except Exception as e:
         return None, f"Could not read parquet: {p.as_posix()}\n{type(e).__name__}: {e}"
+
+
+@st.cache_data(show_spinner=False)
+def load_hse_actual() -> pd.DataFrame:
+    return build_hse_dataset()
+
+
+@st.cache_data(show_spinner=False)
+def load_ukhls_actual() -> pd.DataFrame:
+    return build_ukhls_dataset()
+
+
+@st.cache_data(show_spinner=False)
+def load_gsgb_actual() -> Dict[str, pd.DataFrame]:
+    return build_gsgb_dataset()
+
+
+@st.cache_data(show_spinner=False)
+def load_harmonised_actual() -> pd.DataFrame:
+    return build_harmonised_dataset()
 
 
 def resolve_col(df: pd.DataFrame, candidates: Iterable[str]) -> Optional[str]:
